@@ -1,8 +1,9 @@
 export default{
     name: 'MessageListItem',
-    template: `
+    template: `<li>
         {{ item.text }} - {{ item.createdAt }}
         <button @click="deleteClicked">X</button>
+        </li>
     `,
     props:{
         item:{
