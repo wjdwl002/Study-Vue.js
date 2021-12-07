@@ -9,6 +9,7 @@
 <body>
     <div id="app">
         <app-header :propsdata="message"></app-header>
+        <app-content :propsdata="content"></app-content>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -17,14 +18,20 @@
             template: '<h1>{{ propsdata }}</h1>',
             props: ['propsdata']
         }
+        var appContent = {
+            template: '<h2>{{ propsdata }}</h2>',
+            props: ['propsdata']
+        }
 
         new Vue({
             el:'#app',
             data:{
-                message: 'hi'
+                message: 'hi',
+                content: 'CONTENT'
             },
             components:{
-                appHeader
+                appHeader,
+                appContent
             }
         });
     </script>

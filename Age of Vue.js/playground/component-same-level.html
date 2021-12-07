@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component</title>
+</head>
+<body>
+    <div id="app">
+        
+        <app-header></app-header>
+        <app-content @pass="deliverNum"></app-content>
+        <app-footer :numdata="num"></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        var appHeader = {
+            template: '<div>Header</div>',
+            methods: {
+                clicked: function(){
+                    this.$emit('pass');
+                }
+            }
+        }
+        var appContent = {
+            template: '<div><div>Content</div><button @click="clickBtn">Pass</button></div>',
+            methods: {
+                clickBtn: function(){
+                    this.$emit('pass', 20);
+                }
+            }
+        }
+        var appFooter = {
+            template: '<h1>{{ numdata }}</h1>',
+            props: ['numdata']
+        }
+
+        new Vue({
+            el:'#app',
+            data:{
+                num:10
+            },
+            components:{
+                appHeader, 
+                appContent,
+                appFooter
+            },
+            methods:{
+                deliverNum: function(value){
+                    this.num = value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

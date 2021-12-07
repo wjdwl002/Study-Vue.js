@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+</head>
+<body>
+    <div id="app">
+        <app-header @pass="logText"></app-header>
+        <app-content @increase="increaseNum"></app-content>
+        <app-footer :numData="num"></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<button @click="clicked">Click Me</button>',
+            methods: {
+                clicked: function(){
+                    this.$emit('pass');
+                }
+            }
+        }
+        var appContent = {
+            template: '<button @click="addNum">add</button>',
+            methods: {
+                addNum: function(){
+                    this.$emit('increase');
+                }
+            }
+        }
+        var appFooter = {
+            template: '<h1>{{ numdata }}</h1>',
+            props: ['numdata']
+        }
+
+        new Vue({
+            el:'#app',
+            data:{
+                message: 'hi',
+                num: 10
+            },
+            methods: {
+                logText: function(){
+                    console.log("hi");
+                },
+                increaseNum: function(){
+                    this.num = this.num + 1; 
+                }
+            },
+            components:{
+                appHeader,
+                appContent,
+                appFooter
+            }
+        });
+    </script>
+</body>
+</html>
